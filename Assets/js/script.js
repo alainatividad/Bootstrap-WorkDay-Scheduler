@@ -41,14 +41,15 @@ function checkTimeDiff(currentHour, timeBlock) {
 }
 
 function printSavedSched() {
-    var textArea = ''
+    var textArea = '';
     var storedVal = '';
+    var currDate =  moment().format('MM-DD-YYYY');
 
     // check all timeblocks (child of div that is a child of class timeblock) if there's a corresponding key in localStorage
     for (var i = 0; i < blockCount; i++) {
         textArea = $(".timeblock div textarea").eq(i).attr("id");
-        // use value of timeBlock as search selector
-        storedVal = localStorage.getItem(`${textArea}`);
+        // use value of currentdate and timeBlock as search selector
+        storedVal = localStorage.getItem(`${currDate} ${textArea}`);
 
         // if it is found, load it to textArea
         if (storedVal) {
@@ -60,10 +61,11 @@ function printSavedSched() {
 timeBlockEl.on('click', '.btn', function (event) {
     // I've set a data-time attribute to the button that corresponds to the textArea it should answer to
     var timeBlock = $(event.target).attr('data-time');
+    var currDate =  moment().format('MM-DD-YYYY');
     // use value of timeBlock as search selector and get value
     var textAreaValue = $(`#${timeBlock}`).val();
-    // also use value of timeBlock as keyname in saving in localStorage 
-    localStorage.setItem(`${timeBlock}`, textAreaValue);
+    // use both values of currentdate and timeBlock as keyname in saving in localStorage 
+    localStorage.setItem(`${currDate} ${timeBlock}`, textAreaValue);
     
     // Change class of the alert to be visible
     $('.alert').attr('class', 'alert alert-info text-center d-block');
