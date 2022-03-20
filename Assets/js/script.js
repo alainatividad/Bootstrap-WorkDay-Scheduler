@@ -1,5 +1,7 @@
+// Used const for these as they are not changed
 const timeBlockEl = $('.timeblock');
 const buttonEl = $('.btn');
+// counts the timeblocks in the HTML file and would be used in the for loops in several functions
 const blockCount = timeBlockEl.children().length;
 
 // Sets date at the jumbotron
@@ -33,6 +35,7 @@ function checkTimeBlock() {
     }
 }
 
+// function for comparing the current time with the timeblock and returns their difference in hours
 function checkTimeDiff(currentHour, timeBlock) {
     var timeDiff = 0;
     // get difference of timeblock time to the current time in hours
@@ -40,6 +43,7 @@ function checkTimeDiff(currentHour, timeBlock) {
     return timeDiff;
 }
 
+// loads the events stored in localStorage
 function printSavedSched() {
     var textArea = '';
     var storedVal = '';
@@ -58,6 +62,7 @@ function printSavedSched() {
     }
 }
 
+// event for when the user clicks on the Add button
 timeBlockEl.on('click', '.btn', function (event) {
     // I've set a data-time attribute to the button that corresponds to the textArea it should answer to
     var timeBlock = $(event.target).attr('data-time');
@@ -75,8 +80,8 @@ timeBlockEl.on('click', '.btn', function (event) {
     }, 3000);
 })
 
+// do all of these when the page has finished loading
 function init() {
-    // do all of these when the page has finished loading
     setDate();
     checkTimeBlock();
     printSavedSched();    
